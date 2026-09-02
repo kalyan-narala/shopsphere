@@ -11,6 +11,7 @@ The platform is designed using a microservices' architecture.
 
 - User Service
 - Product Service
+- Cart Service
 - Inventory Service
 - Order Service
 - Payment Service
