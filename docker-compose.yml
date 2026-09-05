@@ -1,0 +1,21 @@
+services:
+
+  shopsphere-postgres:
+    image: postgres:18
+    container_name: shopsphere-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: shopsphere
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+
+    ports:
+      - "5434:5432"
+      
+    volumes:
+      - shopsphere_postgres_data:/var/lib/postgresql
+      - ./infrastructure/docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  shopsphere_postgres_data:
