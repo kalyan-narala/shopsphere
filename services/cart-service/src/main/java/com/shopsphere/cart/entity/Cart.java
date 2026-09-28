@@ -2,12 +2,23 @@ package com.shopsphere.cart.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "carts")
+@Table(
+        name = "carts",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_carts_user_id",
+                        columnNames = "user_id"
+                )
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,4 +40,12 @@ public class Cart {
     )
     @Builder.Default
     private List<CartItem> items = new ArrayList<>();
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 }
