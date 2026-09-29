@@ -9,7 +9,7 @@ public class InsufficientReservedStockException extends RuntimeException {
         super(
                 "Insufficient stock for product: " + productId
                         + ". Requested: " + requestedQuantity
-                        + ", Available: " + reservedQuantity
+                        + ", Reserved: " + reservedQuantity
         );
     }
 }

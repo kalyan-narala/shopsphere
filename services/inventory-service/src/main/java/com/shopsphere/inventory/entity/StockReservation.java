@@ -1,5 +1,6 @@
 package com.shopsphere.inventory.entity;
 
+import com.shopsphere.inventory.enums.ReservationStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,10 +10,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(
-        name = "inventory",
+        name = "stock_reservations",
         uniqueConstraints = @UniqueConstraint(
-                name = "uk_inventory_product_id",
-                columnNames = "product_id"
+                name = "uk_reservation_order_product",
+                columnNames = {"order_id", "product_id"}
         )
 )
 @Getter
@@ -20,26 +21,24 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Inventory {
+public class StockReservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "order_id", nullable = false)
+    private Long orderId;
+
     @Column(name = "product_id", nullable = false)
     private Long productId;
 
-    @Column(name = "available_quantity", nullable = false)
-    @Builder.Default
-    private Integer availableQuantity = 0;
-
-    @Column(name = "reserved_quantity", nullable = false)
-    @Builder.Default
-    private Integer reservedQuantity = 0;
-
-    @Version
     @Column(nullable = false)
-    private Long version;
+    private Integer quantity;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ReservationStatus status;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

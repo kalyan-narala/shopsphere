@@ -5,7 +5,6 @@ import com.shopsphere.inventory.exception.InsufficientReservedStockException;
 import com.shopsphere.inventory.exception.InsufficientStockException;
 import com.shopsphere.inventory.exception.InvalidQuantityException;
 import com.shopsphere.inventory.exception.InventoryNotFoundException;
-import com.shopsphere.inventory.repository.InventoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

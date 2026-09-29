@@ -1,12 +1,30 @@
 package com.shopsphere.inventory.service;
 
+import com.shopsphere.inventory.dto.request.CreateInventoryRequest;
+import com.shopsphere.inventory.dto.request.UpdateStockRequest;
+import com.shopsphere.inventory.dto.response.InventoryResponse;
+
+import java.util.List;
+
 public interface InventoryService {
 
-    void reserveStock(Long productId, Integer quantity);
+    InventoryResponse createInventory(CreateInventoryRequest request);
 
-    void releaseStock(Long productId, Integer quantity);
+    InventoryResponse getInventoryById(Long inventoryId);
 
-    void confirmReservation(Long productId, Integer quantity);
+    InventoryResponse getInventoryByProductId(Long productId);
+
+    List<InventoryResponse> getAllInventory();
+
+    InventoryResponse updateStock(Long productId, UpdateStockRequest request);
+
+    void deleteInventory(Long inventoryId);
+
+    boolean isStockAvailable(Long productId, Integer quantity);
+
+    void reserveStock(Long orderId, Long productId, Integer quantity);
+
+    void releaseStock(Long orderId, Long productId, Integer quantity);
+
+    void confirmReservation(Long orderId, Long productId, Integer quantity);
 }
-
-
